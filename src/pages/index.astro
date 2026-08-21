@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import ProjectCase from '../components/ProjectCase.astro';
+import Gallery from '../components/Gallery.astro';
+import Carousel from '../components/Carousel.astro';
+import Lines from '../components/Lines.astro';
+import Documentation from '../components/Documentation.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { cases } from '../data/cases';
+
+const [lorenaZ, campoDeFlores] = cases;
+---
+<Layout
+  title="María José Farah — Diseño Industrial"
+  description="Portfolio de María José Farah, diseñadora industrial en Córdoba, Argentina. Diseño y desarrollo de mobiliario y espacios."
+>
+  <Header />
+
+  <main>
+    <Hero />
+    <About />
+
+    <section id="proyectos" class="section container">
+      <p class="section__index">02 — Proyectos destacados</p>
+      <h2>Proyectos destacados</h2>
+      <p class="section__intro">Casos de asesoramiento en diseño de espacios y organización de eventos de marca.</p>
+
+      <ProjectCase {...lorenaZ}>
+        <Gallery slot="media" />
+      </ProjectCase>
+
+      <ProjectCase {...campoDeFlores}>
+        <Carousel slot="media" />
+      </ProjectCase>
+    </section>
+
+    <Lines />
+    <Documentation />
+    <Contact />
+  </main>
+
+  <Footer />
+</Layout>
