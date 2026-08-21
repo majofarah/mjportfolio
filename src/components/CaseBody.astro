@@ -1,5 +1,7 @@
 ---
+import { Icon } from 'astro-icon/components';
 import type { DetailItem } from '../data/cases';
+import content from '../data/content.json';
 
 interface Props {
   kicker: string;
@@ -10,6 +12,7 @@ interface Props {
 }
 
 const { kicker, title, description, detailList, pdfHref } = Astro.props;
+const { pdfLinkLabel } = content.projects;
 ---
 <div class="case__body">
   <p class="kicker">{kicker}</p>
@@ -20,5 +23,8 @@ const { kicker, title, description, detailList, pdfHref } = Astro.props;
       <li>{item.label && <><strong>{item.label}:</strong>{' '}</>}{item.text}</li>
     ))}
   </ul>
-  <a class="btn btn--secondary" href={pdfHref} target="_blank" rel="noopener">Ver propuesta completa (PDF) ↗</a>
+  <a class="btn btn--secondary" href={pdfHref} target="_blank" rel="noopener">
+    {pdfLinkLabel}
+    <Icon name="lucide:external-link" aria-hidden="true" width={16} height={16} />
+  </a>
 </div>

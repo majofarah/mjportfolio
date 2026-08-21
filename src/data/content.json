@@ -1,0 +1,66 @@
+{
+  "site": {
+    "title": "María José Farah — Diseño Industrial",
+    "description": "Portfolio de María José Farah, diseñadora industrial en Córdoba, Argentina. Diseño y desarrollo de mobiliario y espacios.",
+    "email": "mariajosefarah.di@gmail.com",
+    "skipLink": "Saltar al contenido"
+  },
+  "header": {
+    "name": "María José Farah",
+    "tagline": "Diseño Industrial · Córdoba, Argentina",
+    "nav": {
+      "projects": "Proyectos",
+      "about": "Sobre mí",
+      "contact": "Contacto"
+    }
+  },
+  "hero": {
+    "title": "Diseño y desarrollo de Mobiliario y Espacios",
+    "lead": "9 años de experiencia en el rubro de Diseño y decoración. Diseño líneas de productos, armo espacios a medida y acompaño cada proyecto desde la idea hasta la entrega.",
+    "ctaWrite": "Escribime"
+  },
+  "about": {
+    "sectionIndex": "01 — Sobre mí",
+    "heading": "Sobre mí",
+    "paragraphs": [
+      "Trabajo en Casa Chula desde 2017, uno de los referentes del rubro de mobiliario y decoración en Córdoba. Me formé en Diseño Industrial en la FAUD (Universidad Nacional de Córdoba) y a lo largo de estos años pasé por diseño y desarrollo de líneas de producto, coordinación de producción y logística, control de calidad, y actualmente estoy a cargo del local comercial y del equipo de ventas.",
+      "Esa mirada de conjunto, desde el desarrollo del producto hasta el cliente final, es lo que aporto a cada proyecto: entender qué se puede fabricar, cómo se arma un espacio y qué necesita quien lo va a usar para poder sentir de su casa un hogar."
+    ],
+    "skills": ["AutoCAD", "SketchUp", "SolidWorks", "CorelDRAW", "Canva", "Monday"]
+  },
+  "projects": {
+    "sectionIndex": "02 — Proyectos destacados",
+    "heading": "Proyectos destacados",
+    "intro": "Casos de asesoramiento en diseño de espacios y organización de eventos de marca.",
+    "pdfLinkLabel": "Ver propuesta completa"
+  },
+  "lines": {
+    "sectionIndex": "03 — Líneas de mobiliario",
+    "heading": "Líneas de mobiliario",
+    "intro": "Desarrollo de identidad y lenguaje formal para las líneas de producto de Casa Chula."
+  },
+  "documentation": {
+    "sectionIndex": "04 — Documentación",
+    "heading": "Documentación de proyectos",
+    "intro": "Registro de parte de procesos de desarrollo de diferentes proyectos."
+  },
+  "contact": {
+    "sectionIndex": "05 — Contacto",
+    "heading": "Trabajemos juntos",
+    "paragraphs": [
+      "Busco sumarme a un equipo de diseño para el desarrollo de proyectos de espacios y mobiliario.",
+      "También ofrezco asesoramiento a particulares para equipar y decorar su hogar."
+    ],
+    "resumeCta": "Descargar CV",
+    "resumeHref": "https://drive.google.com/file/d/1zFdGTqlGgRP8FysT2JR5ySsBDDuiChK0/view?usp=sharing",
+    "asideTitle": "Asesoramiento de hogar",
+    "asideItems": [
+      "Relevamiento de medidas y ambientes",
+      "Definición de estilo y paleta de colores",
+      "Selección de mobiliario y dónde conseguirlo"
+    ]
+  },
+  "footer": {
+    "text": "María José Farah — Córdoba, Argentina"
+  }
+}

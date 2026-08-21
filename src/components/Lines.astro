@@ -1,11 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import { lines } from '../data/lines';
+import content from '../data/content.json';
+const { lines: linesContent } = content;
 ---
-<section id="lineas" class="section container">
-  <p class="section__index">03 — Líneas de mobiliario</p>
-  <h2>Líneas de mobiliario</h2>
-  <p class="section__intro">Desarrollo de identidad y lenguaje formal para las líneas de producto de Casa Chula.</p>
+<section id="lineas" class="section container" aria-labelledby="lineas-heading" data-reveal>
+  <p class="section__index">{linesContent.sectionIndex}</p>
+  <h2 id="lineas-heading">{linesContent.heading}</h2>
+  <p class="section__intro">{linesContent.intro}</p>
   <ul class="lines">
     {lines.map((line) => (
       <li class="line">
