@@ -1,78 +1,80 @@
 # Portfolio — María José Farah
 
-Sitio construido con [Astro](https://astro.build) (salida estática, sin framework de UI —
-el carrusel es JS plano co-ubicado en su componente). Se despliega en GitHub Pages vía
-GitHub Actions.
+Built with [Astro](https://astro.build) (static output, no UI framework — the carousel
+is plain JS co-located in its component). Deployed to GitHub Pages via GitHub Actions.
 
 ```
-astro.config.mjs           Config de Astro (sitemap; sin site/base hardcodeados, ver más abajo)
+astro.config.mjs           Astro config (sitemap; no hardcoded site/base, see below)
 public/
-├── favicon.svg              Ícono de la pestaña, con los tokens de color del sitio
-└── og-image.jpg             Imagen para previews al compartir el link (OG / Twitter)
+├── favicon.svg              Tab icon, built from the site's own color tokens
+└── og-image.jpg             Social-share preview image (OG / Twitter)
 src/
-├── layouts/Layout.astro     <head>: meta, fuentes, OG/Twitter, preload del hero, favicon
-├── styles/styles.css        Tokens de diseño + componentes + responsive
+├── layouts/Layout.astro     <head>: meta, fonts, OG/Twitter, hero preload, favicon
+├── styles/styles.css        Design tokens + components + responsive
 ├── data/
-│   ├── lines.ts               Las 6 líneas de mobiliario (nombre, nota, imagen)
-│   ├── cases.ts                Los 2 casos de estudio (texto, detail-list, link a PDF)
-│   └── docs.ts                  Los 4 links de documentación
-├── components/                Un componente por sección + Carousel.astro y Gallery.astro
-│   (las dos variantes de "media" que puede llevar un caso de estudio)
-├── assets/img/               Fotos originales — Astro las procesa en build (WebP + srcset)
-└── pages/index.astro         Arma la página a partir de Layout + componentes + data
-.github/workflows/astro.yml  Build + deploy a GitHub Pages (ver sección de abajo)
+│   ├── lines.ts               The 6 furniture lines (name, note, image)
+│   ├── cases.ts                The 2 case studies (copy, detail list, PDF link)
+│   └── docs.ts                  The 4 documentation links
+├── components/                One component per section, plus Carousel.astro and
+│   Gallery.astro (the two "media" shapes a case study can use)
+├── assets/img/               Source photos — Astro processes these at build time
+│   (WebP + srcset)
+└── pages/index.astro         Assembles the page from Layout + components + data
+.github/workflows/astro.yml  Build + deploy to GitHub Pages (see below)
 ```
 
-## Desarrollo local
+## Local development
 
 ```bash
 npm install
 npm run dev       # http://localhost:4321
-npm run build     # genera dist/
-npm run preview   # sirve dist/ localmente
+npm run build     # outputs dist/
+npm run preview   # serves dist/ locally
 ```
 
-## Publicar en GitHub Pages
+## Publishing to GitHub Pages
 
-Ya configurado — no requiere pasos manuales para publicar. El repo tiene:
+Already configured — no manual steps needed to publish. The repo has:
 
-- **Settings → Pages → Source: GitHub Actions** (ya activado)
-- `.github/workflows/astro.yml`: en cada push a `main`, instala dependencias, corre
-  `astro build --site ... --base ...` (esos dos valores los inyecta el propio workflow
-  desde la configuración de Pages del repo — por eso `astro.config.mjs` no los tiene
-  hardcodeados) y publica `dist/` como el sitio.
-- El deploy usa la ruta moderna de Pages (`upload-pages-artifact` + `deploy-pages`), no
-  Jekyll — así que no aplica el problema típico de Jekyll ignorando carpetas que
-  empiezan con `_` (como `_astro/`).
+- **Settings → Pages → Source: GitHub Actions** (already enabled)
+- `.github/workflows/astro.yml`: on every push to `main`, installs dependencies, runs
+  `astro build --site ... --base ...` (both values are injected by the workflow itself
+  from the repo's Pages configuration — that's why `astro.config.mjs` doesn't hardcode
+  them), and publishes `dist/` as the site.
+- Deployment uses the modern Pages path (`upload-pages-artifact` + `deploy-pages`), not
+  Jekyll — so the usual Jekyll gotcha of ignoring folders starting with `_` (like
+  `_astro/`) doesn't apply here.
 
-Sitio publicado: **https://majofarah.github.io/mjportfolio/**
+Live site: **https://majofarah.github.io/mjportfolio/**
 
-## Convenciones
+## Conventions
 
-**Tokens.** Colores, tipografías, radios y medidas viven en `:root` (`src/styles/styles.css`,
-sección 1). Cambiar la paleta o las fuentes se hace ahí, no en los componentes.
+**Tokens.** Colors, typography, radii, and spacing live in `:root`
+(`src/styles/styles.css`, section 1). Change the palette or fonts there, not in
+individual components.
 
-**Tipografía.** DM Serif Display para títulos, DM Sans para texto. Se cargan desde
-Google Fonts en `Layout.astro`.
+**Typography.** DM Serif Display for headings, DM Sans for body text. Loaded from
+Google Fonts in `Layout.astro`.
 
-**Imágenes.** Cada foto está pre-recortada a la proporción de su marco (el CSS usa
-`object-fit: cover`). Astro genera automáticamente versiones WebP en varios anchos
-(`widths`/`sizes` en cada `<Image>`) — al reemplazar una foto alcanza con poner el
-archivo nuevo en `src/assets/img/` con el mismo nombre; no hace falta optimizarla a mano.
+**Images.** Every photo is pre-cropped to its frame's aspect ratio (CSS uses
+`object-fit: cover`). Astro automatically generates WebP versions at several widths
+(`widths`/`sizes` on each `<Image>`) — to replace a photo, just drop the new file into
+`src/assets/img/` with the same name; no manual optimization needed.
 
-**Contenido repetido.** Las líneas de mobiliario, los casos de estudio y los links de
-documentación viven en `src/data/*.ts`, no en el HTML — agregar o editar uno de estos
-ítems es editar esos archivos, no tocar componentes.
+**Repeated content.** Furniture lines, case studies, and documentation links live in
+`src/data/*.ts`, not in the HTML — adding or editing one of these items means editing
+those files, not touching components.
 
-**Carrusel.** `Carousel.astro` es el único componente con `data-carousel`; su lógica
-(rotación automática, pausa en hover y al ocultar la pestaña) vive en un `<script>`
-co-ubicado en el mismo archivo. `data-interval` en ms controla la velocidad.
+**Carousel.** `Carousel.astro` is the only component with `data-carousel`; its logic
+(auto-rotation, pause on hover, pause when the tab is hidden) lives in a `<script>`
+co-located in the same file. `data-interval` (ms) controls the speed.
 
-**Casos de estudio.** `ProjectCase.astro` es genérico — recibe el texto por props y el
-bloque de media (`Gallery` o `Carousel`) por slot. El prop `reverse` no es solo estético:
-controla el orden real del DOM, que es lo que decide qué columna ocupa cada bloque en
-desktop — mantenerlo en sync con el layout deseado al agregar un caso nuevo.
+**Case studies.** `ProjectCase.astro` is generic — it takes the copy as props and the
+media block (`Gallery` or `Carousel`) as a slot. The `reverse` prop isn't just
+cosmetic: it controls the actual DOM order, which is what decides which column each
+block sits in on desktop — keep it in sync with the intended layout when adding a new
+case.
 
-**Enlaces a PDFs.** Alojados en Google Drive; los `href` en `src/data/cases.ts` y
-`src/data/docs.ts` apuntan a los links de compartir. Para cambiar un documento, se
-reemplaza sólo el `href`.
+**PDF links.** Hosted on Google Drive; the `href`s in `src/data/cases.ts` and
+`src/data/docs.ts` point to the share links. To swap a document, just replace the
+`href`.
