@@ -1,0 +1,24 @@
+---
+import type { DetailItem } from '../data/cases';
+
+interface Props {
+  kicker: string;
+  title: string;
+  description: string;
+  detailList: DetailItem[];
+  pdfHref: string;
+}
+
+const { kicker, title, description, detailList, pdfHref } = Astro.props;
+---
+<div class="case__body">
+  <p class="kicker">{kicker}</p>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <ul class="detail-list">
+    {detailList.map((item) => (
+      <li>{item.label && <><strong>{item.label}:</strong>{' '}</>}{item.text}</li>
+    ))}
+  </ul>
+  <a class="btn btn--secondary" href={pdfHref} target="_blank" rel="noopener">Ver propuesta completa (PDF) ↗</a>
+</div>

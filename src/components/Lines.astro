@@ -1,0 +1,26 @@
+---
+import { Image } from 'astro:assets';
+import { lines } from '../data/lines';
+---
+<section id="lineas" class="section container">
+  <p class="section__index">03 — Líneas de mobiliario</p>
+  <h2>Líneas de mobiliario</h2>
+  <p class="section__intro">Desarrollo de identidad y lenguaje formal para las líneas de producto de Casa Chula.</p>
+  <ul class="lines">
+    {lines.map((line) => (
+      <li class="line">
+        <Image
+          class="media media--line"
+          src={line.image}
+          alt={`Línea ${line.name}`}
+          width={718}
+          height={520}
+          widths={[359, 540, 718]}
+          sizes="(max-width: 520px) 100vw, (max-width: 980px) 50vw, 33vw"
+        />
+        <p class="line__name">{line.name}</p>
+        <p class="line__note">{line.note}</p>
+      </li>
+    ))}
+  </ul>
+</section>

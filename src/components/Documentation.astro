@@ -1,0 +1,13 @@
+---
+import { docs } from '../data/docs';
+---
+<section id="documentacion" class="section container">
+  <p class="section__index">04 — Documentación</p>
+  <h2>Documentación de proyectos</h2>
+  <p class="section__intro">Registro de parte de procesos de desarrollo de diferentes proyectos.</p>
+  <ul class="docs">
+    {docs.map((doc) => (
+      <li><a class="doc" href={doc.href} target="_blank" rel="noopener">{doc.title}</a></li>
+    ))}
+  </ul>
+</section>
