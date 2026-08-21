@@ -14,7 +14,10 @@ const { hero: heroContent, site } = content;
         <Icon name="lucide:mail" aria-hidden="true" width={16} height={16} />
         {heroContent.ctaWrite}
       </a>
-      <a class="btn btn--secondary" href="#proyectos">{heroContent.ctaProjects}</a>
+      <a class="btn btn--secondary" href="#proyectos">
+        <Icon name="lucide:layout-grid" aria-hidden="true" width={16} height={16} />
+        {heroContent.ctaProjects}
+      </a>
     </div>
   </div>
   <figure class="bracketed">
@@ -26,6 +29,7 @@ const { hero: heroContent, site } = content;
       height={840}
       widths={[520, 760, 1020]}
       sizes="(max-width: 760px) 100vw, 50vw"
+      loading="eager"
     />
   </figure>
 </section>

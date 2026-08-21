@@ -130,7 +130,7 @@ button:focus-visible,
   font-weight: 700;
   text-decoration: none;
   border: 1px solid transparent;
-  transition: background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
 }
 .btn--sm { padding: 9px 18px; font-size: 13px; }
 .btn--primary { background: var(--text); color: var(--bg); }
@@ -140,8 +140,7 @@ button:focus-visible,
 .btn--accent { background: var(--accent); color: var(--text); }
 .btn--accent:hover { background: #d0937f; color: var(--text); }
 .btn--outline-onDark { background: transparent; color: var(--bg); border-color: var(--neutral-500); }
-.btn--outline-onDark:hover { border-color: var(--neutral-300); }
-.btn:hover { transform: translateY(-1px); }
+.btn--outline-onDark:hover { color: var(--bg); border-color: var(--neutral-300); }
 
 .tag {
   display: inline-block;
