@@ -140,7 +140,7 @@ button:focus-visible,
 .btn--accent { background: var(--accent); color: var(--text); }
 .btn--accent:hover { background: #d0937f; color: var(--text); }
 .btn--outline-onDark { background: transparent; color: var(--bg); border-color: var(--neutral-500); }
-.btn--outline-onDark:hover { color: var(--bg); border-color: var(--neutral-300); }
+.btn--outline-onDark:hover { background: var(--accent); color: var(--text); border-color: var(--accent); }
 
 .tag {
   display: inline-block;
