@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import cdf1 from '../assets/img/cdf-1.jpg';
+import cdf2 from '../assets/img/cdf-2.jpg';
+import cdf3 from '../assets/img/cdf-3.jpg';
+import cdf4 from '../assets/img/cdf-4.jpg';
+
+const slides = [
+  { src: cdf1, alt: 'Mesas con lámparas de mimbre en el evento' },
+  { src: cdf2, alt: 'Logística de armado del evento' },
+  { src: cdf3, alt: 'Living exterior con sombrilla' },
+  { src: cdf4, alt: 'Recorrido del vivero al atardecer' },
+];
+---
+<div class="carousel" data-carousel data-interval="3000" aria-label="Fotos del evento Campo de Flores">
+  {slides.map((slide, i) => (
+    <Image
+      class={`carousel__slide${i === 0 ? ' is-active' : ''}`}
+      src={slide.src}
+      alt={slide.alt}
+      width={1080}
+      height={600}
+      widths={[540, 760, 1080]}
+      sizes="(max-width: 760px) 100vw, 50vw"
+      aria-hidden={i === 0 ? 'false' : 'true'}
+    />
+  ))}
+</div>
+
+<script>
+  /**
+   * Crossfade carousel.
+   * Markup contract: [data-carousel] wrapper with .carousel__slide children,
+   * one carrying .is-active. Optional data-interval (ms, default 3000).
+   * Pauses while hovered and while the tab is hidden.
+   */
+  function initCarousel(root: HTMLElement) {
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('.carousel__slide'));
+    if (slides.length < 2) return;
+
+    const interval = Number(root.dataset.interval) || 3000;
+    let index = Math.max(0, slides.findIndex((s) => s.classList.contains('is-active')));
+    let timer: number | null = null;
+
+    const show = (next: number) => {
+      slides[index].classList.remove('is-active');
+      slides[index].setAttribute('aria-hidden', 'true');
+      index = (next + slides.length) % slides.length;
+      slides[index].classList.add('is-active');
+      slides[index].setAttribute('aria-hidden', 'false');
+    };
+
+    const start = () => {
+      if (timer) return;
+      timer = window.setInterval(() => show(index + 1), interval);
+    };
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = null;
+    };
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+
+    start();
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach(initCarousel);
+</script>

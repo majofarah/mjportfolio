@@ -1,0 +1,31 @@
+---
+import CaseBody from './CaseBody.astro';
+import type { DetailItem } from '../data/cases';
+
+interface Props {
+  kicker: string;
+  title: string;
+  description: string;
+  detailList: DetailItem[];
+  pdfHref: string;
+  divided?: boolean;
+  reverse?: boolean;
+}
+
+const { kicker, title, description, detailList, pdfHref, divided, reverse } = Astro.props;
+
+const classes = ['case', divided && 'case--divided', reverse && 'case--reverse'].filter(Boolean).join(' ');
+---
+<article class={classes}>
+  {reverse ? (
+    <Fragment>
+      <CaseBody kicker={kicker} title={title} description={description} detailList={detailList} pdfHref={pdfHref} />
+      <slot name="media" />
+    </Fragment>
+  ) : (
+    <Fragment>
+      <slot name="media" />
+      <CaseBody kicker={kicker} title={title} description={description} detailList={detailList} pdfHref={pdfHref} />
+    </Fragment>
+  )}
+</article>

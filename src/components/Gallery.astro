@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+import caseMain from '../assets/img/case1-main.jpg';
+import caseDetail1 from '../assets/img/case1-detail1.jpg';
+import caseDetail2 from '../assets/img/case1-detail2.jpg';
+---
+<div class="case__gallery">
+  <Image
+    class="media media--wide"
+    src={caseMain}
+    alt="Sillón y equipamiento del living"
+    width={1080}
+    height={440}
+    widths={[540, 760, 1080]}
+    sizes="(max-width: 760px) 100vw, 50vw"
+  />
+  <Image
+    class="media media--small"
+    src={caseDetail1}
+    alt="Detalle del living"
+    width={528}
+    height={280}
+    widths={[264, 528]}
+    sizes="(max-width: 520px) 50vw, (max-width: 760px) 50vw, 25vw"
+  />
+  <Image
+    class="media media--small"
+    src={caseDetail2}
+    alt="Detalle del comedor"
+    width={528}
+    height={280}
+    widths={[264, 528]}
+    sizes="(max-width: 520px) 50vw, (max-width: 760px) 50vw, 25vw"
+  />
+</div>
