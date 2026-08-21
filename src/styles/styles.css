@@ -41,6 +41,11 @@
 /* 2. Reset & base ------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -70,6 +75,30 @@ button:focus-visible,
   outline-offset: 3px;
 }
 
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 100;
+  padding: 10px 18px;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: top .2s ease;
+}
+.skip-link:focus { top: 16px; }
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+[data-reveal].is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
 /* 3. Layout primitives -------------------------------------- */
 .container { max-width: var(--measure); margin-inline: auto; padding-inline: var(--gutter); }
 
@@ -81,10 +110,10 @@ button:focus-visible,
 .section__index {
   font-family: var(--font-display);
   font-size: 15px;
-  color: var(--neutral-400);
+  color: var(--neutral-600);
   margin: 0 0 8px;
 }
-.section__index--onDark { color: var(--neutral-500); }
+.section__index--onDark { color: var(--neutral-400); }
 
 .section__intro { font-size: 15px; color: var(--neutral-700); margin: 0 0 20px; }
 
@@ -94,6 +123,7 @@ button:focus-visible,
 .btn {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   padding: 12px 22px;
   border-radius: 999px;
   font-size: 15px;
@@ -107,8 +137,10 @@ button:focus-visible,
 .btn--primary:hover { background: var(--neutral-900); color: var(--bg); }
 .btn--secondary { background: transparent; color: var(--text); border-color: var(--neutral-300); }
 .btn--secondary:hover { background: var(--surface); color: var(--text); }
-.btn--accent { background: var(--accent); color: var(--bg); }
-.btn--accent:hover { background: #d0937f; color: var(--bg); }
+.btn--accent { background: var(--accent); color: var(--text); }
+.btn--accent:hover { background: #d0937f; color: var(--text); }
+.btn--outline-onDark { background: transparent; color: var(--bg); border-color: var(--neutral-500); }
+.btn--outline-onDark:hover { background: var(--accent); color: var(--text); border-color: var(--accent); }
 
 .tag {
   display: inline-block;
@@ -132,6 +164,19 @@ button:focus-visible,
   filter: saturate(.96) contrast(1.02);
 }
 .media--hero { border-radius: var(--radius-lg); }
+
+.media--line,
+.case__gallery .media {
+  transition: transform .3s ease;
+}
+.media--line:hover,
+.case__gallery .media:hover {
+  transform: scale(1.02);
+}
+@media (prefers-reduced-motion: reduce) {
+  .media--line, .case__gallery .media { transition: none; }
+  .media--line:hover, .case__gallery .media:hover { transform: none; }
+}
 
 /* Decorative corner brackets around the hero photo */
 .bracketed { position: relative; margin: 0; padding: 14px; }
@@ -187,6 +232,32 @@ button:focus-visible,
   .carousel__slide { transition: none; }
 }
 
+.carousel__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: none;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  color: var(--text);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity .2s ease, background .18s ease;
+}
+.carousel__nav--prev { left: 12px; }
+.carousel__nav--next { right: 12px; }
+.carousel:hover .carousel__nav,
+.carousel:focus-within .carousel__nav {
+  opacity: 1;
+}
+.carousel__nav:hover { background: var(--bg); }
+
 /* 5. Sections ----------------------------------------------- */
 .site-header {
   display: flex;
@@ -201,6 +272,28 @@ button:focus-visible,
 .identity__name { font-family: var(--font-display); font-size: 32px; margin: 0 0 6px; }
 .site-nav { display: flex; align-items: center; gap: 32px; font-size: 14px; font-weight: 600; }
 .site-nav a { text-decoration: none; }
+.site-nav a:not(.btn) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  padding-bottom: 2px;
+}
+.site-nav a svg { flex-shrink: 0; }
+.site-nav a:not(.btn)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 2px;
+  background: currentColor;
+  transition: right .25s ease;
+}
+.site-nav a:not(.btn):hover::after { right: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .site-nav a:not(.btn)::after { transition: none; }
+}
 
 .hero {
   display: grid;
@@ -242,7 +335,10 @@ button:focus-visible,
 
 .docs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .doc {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   padding: 18px 20px;
   background: var(--surface);
   border-radius: var(--radius-sm);
@@ -252,6 +348,7 @@ button:focus-visible,
   font-weight: 500;
   transition: background .18s ease;
 }
+.doc svg { flex-shrink: 0; }
 .doc:hover { background: #e2ddd3; color: var(--text); }
 
 .contact-wrap { padding-block: 32px; margin-bottom: 80px; }
@@ -282,13 +379,18 @@ button:focus-visible,
 .contact__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; }
 .contact__title { color: var(--bg); margin-bottom: 12px; }
 .contact__grid p { color: var(--neutral-300); max-width: 480px; }
-.contact__grid .btn { margin-top: 10px; }
+.contact__grid .actions { margin-top: 10px; }
+.contact a:focus-visible,
+.contact button:focus-visible,
+.contact .btn:focus-visible {
+  outline-color: var(--accent);
+}
 .contact__aside { border-left: 1px solid var(--neutral-700); padding-left: 32px; }
 .contact__asideTitle {
   font-size: 13px;
   letter-spacing: .04em;
   text-transform: uppercase;
-  color: var(--neutral-500);
+  color: var(--neutral-400);
   margin: 0 0 14px;
 }
 .contact__aside ul {
@@ -308,7 +410,7 @@ button:focus-visible,
 }
 
 @media (max-width: 760px) {
-  :root { --gutter: 20px; }
+  :root { --gutter: 28px; }
   .site-header { padding: 20px var(--gutter); }
   .site-nav { gap: 16px; font-size: 13px; }
   .hero { grid-template-columns: 1fr; gap: 28px; padding-block: 8px 56px; }
