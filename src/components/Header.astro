@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import content from '../data/content.json';
 const { header } = content;
 ---
@@ -8,8 +9,17 @@ const { header } = content;
     <span class="tag">{header.tagline}</span>
   </div>
   <nav class="site-nav" aria-label="Principal">
-    <a href="#proyectos">{header.nav.projects}</a>
-    <a href="#sobre-mi">{header.nav.about}</a>
-    <a href="#contacto" class="btn btn--primary btn--sm">{header.nav.contact}</a>
+    <a href="#proyectos">
+      <Icon name="lucide:layout-grid" aria-hidden="true" width={16} height={16} />
+      {header.nav.projects}
+    </a>
+    <a href="#sobre-mi">
+      <Icon name="lucide:user" aria-hidden="true" width={16} height={16} />
+      {header.nav.about}
+    </a>
+    <a href="#contacto" class="btn btn--primary btn--sm">
+      <Icon name="lucide:mail" aria-hidden="true" width={16} height={16} />
+      {header.nav.contact}
+    </a>
   </nav>
 </header>

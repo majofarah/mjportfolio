@@ -243,7 +243,7 @@ button:focus-visible,
   height: 36px;
   border-radius: 999px;
   border: none;
-  background: rgba(244, 243, 238, 0.85);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
   color: var(--text);
   cursor: pointer;
   opacity: 0;
@@ -257,7 +257,6 @@ button:focus-visible,
   opacity: 1;
 }
 .carousel__nav:hover { background: var(--bg); }
-.carousel__nav svg { width: 18px; height: 18px; }
 
 /* 5. Sections ----------------------------------------------- */
 .site-header {
@@ -274,9 +273,13 @@ button:focus-visible,
 .site-nav { display: flex; align-items: center; gap: 32px; font-size: 14px; font-weight: 600; }
 .site-nav a { text-decoration: none; }
 .site-nav a:not(.btn) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   position: relative;
   padding-bottom: 2px;
 }
+.site-nav a svg { flex-shrink: 0; }
 .site-nav a:not(.btn)::after {
   content: "";
   position: absolute;
@@ -376,7 +379,12 @@ button:focus-visible,
 .contact__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; }
 .contact__title { color: var(--bg); margin-bottom: 12px; }
 .contact__grid p { color: var(--neutral-300); max-width: 480px; }
-.contact__grid .btn { margin-top: 10px; }
+.contact__grid .actions { margin-top: 10px; }
+.contact a:focus-visible,
+.contact button:focus-visible,
+.contact .btn:focus-visible {
+  outline-color: var(--accent);
+}
 .contact__aside { border-left: 1px solid var(--neutral-700); padding-left: 32px; }
 .contact__asideTitle {
   font-size: 13px;

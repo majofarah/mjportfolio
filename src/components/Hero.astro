@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import hero from '../assets/img/hero.jpg';
 import content from '../data/content.json';
-const { hero: heroContent, site } = content;
+const { hero: heroContent, header, site } = content;
 ---
 <section class="hero container">
   <div class="hero__copy">
@@ -16,7 +16,7 @@ const { hero: heroContent, site } = content;
       </a>
       <a class="btn btn--secondary" href="#proyectos">
         <Icon name="lucide:layout-grid" aria-hidden="true" width={16} height={16} />
-        {heroContent.ctaProjects}
+        {header.nav.projects}
       </a>
     </div>
   </div>
