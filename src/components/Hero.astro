@@ -1,14 +1,20 @@
 ---
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 import hero from '../assets/img/hero.jpg';
+import content from '../data/content.json';
+const { hero: heroContent, site } = content;
 ---
 <section class="hero container">
   <div class="hero__copy">
-    <h1 class="hero__title">Diseño y desarrollo de Mobiliario y Espacios</h1>
-    <p class="lead">9 años de experiencia en el rubro de Diseño y decoración. Diseño líneas de productos, armo espacios a medida y acompaño cada proyecto desde la idea hasta la entrega.</p>
+    <h1 class="hero__title">{heroContent.title}</h1>
+    <p class="lead">{heroContent.lead}</p>
     <div class="actions">
-      <a class="btn btn--primary" href="mailto:mariajosefarah.di@gmail.com">Escribime</a>
-      <a class="btn btn--secondary" href="#proyectos">Ver proyectos</a>
+      <a class="btn btn--primary" href={`mailto:${site.email}`}>
+        <Icon name="lucide:mail" aria-hidden="true" width={16} height={16} />
+        {heroContent.ctaWrite}
+      </a>
+      <a class="btn btn--secondary" href="#proyectos">{heroContent.ctaProjects}</a>
     </div>
   </div>
   <figure class="bracketed">

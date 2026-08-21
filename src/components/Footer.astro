@@ -1,4 +1,5 @@
 ---
+import content from '../data/content.json';
 const year = new Date().getFullYear();
 ---
-<footer class="site-footer container">© {year} María José Farah — Córdoba, Argentina</footer>
+<footer class="site-footer container">© {year} {content.footer.text}</footer>

@@ -16,7 +16,7 @@ const { kicker, title, description, detailList, pdfHref, divided, reverse } = As
 
 const classes = ['case', divided && 'case--divided', reverse && 'case--reverse'].filter(Boolean).join(' ');
 ---
-<article class={classes}>
+<article class={classes} data-reveal>
   {reverse ? (
     <Fragment>
       <CaseBody kicker={kicker} title={title} description={description} detailList={detailList} pdfHref={pdfHref} />

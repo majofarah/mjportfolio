@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 import cdf1 from '../assets/img/cdf-1.jpg';
 import cdf2 from '../assets/img/cdf-2.jpg';
 import cdf3 from '../assets/img/cdf-3.jpg';
@@ -25,6 +26,12 @@ const slides = [
       aria-hidden={i === 0 ? 'false' : 'true'}
     />
   ))}
+  <button type="button" class="carousel__nav carousel__nav--prev" data-carousel-prev aria-label="Anterior">
+    <Icon name="lucide:chevron-left" aria-hidden="true" />
+  </button>
+  <button type="button" class="carousel__nav carousel__nav--next" data-carousel-next aria-label="Siguiente">
+    <Icon name="lucide:chevron-right" aria-hidden="true" />
+  </button>
 </div>
 
 <script>
@@ -32,7 +39,8 @@ const slides = [
    * Crossfade carousel.
    * Markup contract: [data-carousel] wrapper with .carousel__slide children,
    * one carrying .is-active. Optional data-interval (ms, default 3000).
-   * Pauses while hovered and while the tab is hidden.
+   * Pauses while hovered and while the tab is hidden. Manual prev/next buttons
+   * restart the autoplay timer so they don't fight the next automatic tick.
    */
   function initCarousel(root: HTMLElement) {
     const slides = Array.from(root.querySelectorAll<HTMLElement>('.carousel__slide'));
@@ -62,6 +70,17 @@ const slides = [
     root.addEventListener('mouseenter', stop);
     root.addEventListener('mouseleave', start);
     document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+
+    root.querySelector('[data-carousel-prev]')?.addEventListener('click', () => {
+      stop();
+      show(index - 1);
+      start();
+    });
+    root.querySelector('[data-carousel-next]')?.addEventListener('click', () => {
+      stop();
+      show(index + 1);
+      start();
+    });
 
     start();
   }

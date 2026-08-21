@@ -1,21 +1,30 @@
 ---
+import { Icon } from 'astro-icon/components';
+import content from '../data/content.json';
+const { contact, site } = content;
 ---
-<section id="contacto" class="container contact-wrap">
-  <div class="contact">
-    <p class="section__index section__index--onDark">05 — Contacto</p>
+<section id="contacto" class="container contact-wrap" aria-labelledby="contacto-heading">
+  <div class="contact" data-reveal>
+    <p class="section__index section__index--onDark">{contact.sectionIndex}</p>
     <div class="contact__grid">
       <div>
-        <h2 class="contact__title">Trabajemos juntos</h2>
-        <p>Busco sumarme a un equipo de diseño para el desarrollo de proyectos de espacios y mobiliario.</p>
-        <p>También ofrezco asesoramiento a particulares para equipar y decorar su hogar.</p>
-        <a class="btn btn--accent" href="mailto:mariajosefarah.di@gmail.com">mariajosefarah.di@gmail.com</a>
+        <h2 class="contact__title" id="contacto-heading">{contact.heading}</h2>
+        {contact.paragraphs.map((p: string) => <p>{p}</p>)}
+        <div class="actions">
+          <a class="btn btn--accent" href={`mailto:${site.email}`}>
+            <Icon name="lucide:mail" aria-hidden="true" width={16} height={16} />
+            {site.email}
+          </a>
+          <a class="btn btn--outline-onDark" href={contact.resumeHref} target="_blank" rel="noopener">
+            <Icon name="lucide:download" aria-hidden="true" width={16} height={16} />
+            {contact.resumeCta}
+          </a>
+        </div>
       </div>
       <div class="contact__aside">
-        <p class="contact__asideTitle">Asesoramiento de hogar</p>
+        <p class="contact__asideTitle">{contact.asideTitle}</p>
         <ul>
-          <li>Relevamiento de medidas y ambientes</li>
-          <li>Definición de estilo y paleta de colores</li>
-          <li>Selección de mobiliario y dónde conseguirlo</li>
+          {contact.asideItems.map((item: string) => <li>{item}</li>)}
         </ul>
       </div>
     </div>

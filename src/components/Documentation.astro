@@ -1,13 +1,21 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { docs } from '../data/docs';
+import content from '../data/content.json';
+const { documentation } = content;
 ---
-<section id="documentacion" class="section container">
-  <p class="section__index">04 — Documentación</p>
-  <h2>Documentación de proyectos</h2>
-  <p class="section__intro">Registro de parte de procesos de desarrollo de diferentes proyectos.</p>
+<section id="documentacion" class="section container" aria-labelledby="documentacion-heading" data-reveal>
+  <p class="section__index">{documentation.sectionIndex}</p>
+  <h2 id="documentacion-heading">{documentation.heading}</h2>
+  <p class="section__intro">{documentation.intro}</p>
   <ul class="docs">
     {docs.map((doc) => (
-      <li><a class="doc" href={doc.href} target="_blank" rel="noopener">{doc.title}</a></li>
+      <li>
+        <a class="doc" href={doc.href} target="_blank" rel="noopener">
+          {doc.title}
+          <Icon name="lucide:external-link" aria-hidden="true" width={16} height={16} />
+        </a>
+      </li>
     ))}
   </ul>
 </section>

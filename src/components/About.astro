@@ -1,21 +1,20 @@
 ---
 import { Image } from 'astro:assets';
 import retrato from '../assets/img/retrato.jpg';
-
-const skills = ['AutoCAD', 'SketchUp', 'SolidWorks', 'CorelDRAW', 'Canva', 'Monday'];
+import content from '../data/content.json';
+const { about } = content;
 ---
-<section id="sobre-mi" class="section container">
-  <p class="section__index">01 — Sobre mí</p>
+<section id="sobre-mi" class="section container" aria-labelledby="sobre-mi-heading" data-reveal>
+  <p class="section__index">{about.sectionIndex}</p>
   <div class="about">
     <div class="about__portrait">
       <Image src={retrato} alt="Retrato de María José Farah" width={520} height={520} />
     </div>
     <div class="about__body">
-      <h2>Sobre mí</h2>
-      <p>Trabajo en Casa Chula desde 2017, uno de los referentes del rubro de mobiliario y decoración en Córdoba. Me formé en Diseño Industrial en la FAUD (Universidad Nacional de Córdoba) y a lo largo de estos años pasé por diseño y desarrollo de líneas de producto, coordinación de producción y logística, control de calidad, y actualmente estoy a cargo del local comercial y del equipo de ventas.</p>
-      <p>Esa mirada de conjunto, desde el desarrollo del producto hasta el cliente final, es lo que aporto a cada proyecto: entender qué se puede fabricar, cómo se arma un espacio y qué necesita quien lo va a usar para poder sentir de su casa un hogar.</p>
+      <h2 id="sobre-mi-heading">{about.heading}</h2>
+      {about.paragraphs.map((p: string) => <p>{p}</p>)}
       <ul class="tags">
-        {skills.map((skill) => <li class="tag">{skill}</li>)}
+        {about.skills.map((skill: string) => <li class="tag">{skill}</li>)}
       </ul>
     </div>
   </div>

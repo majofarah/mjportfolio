@@ -1,13 +1,15 @@
 ---
+import content from '../data/content.json';
+const { header } = content;
 ---
 <header class="site-header">
   <div class="identity">
-    <p class="identity__name">María José Farah</p>
-    <span class="tag">Diseño Industrial · Córdoba, Argentina</span>
+    <p class="identity__name">{header.name}</p>
+    <span class="tag">{header.tagline}</span>
   </div>
   <nav class="site-nav" aria-label="Principal">
-    <a href="#proyectos">Proyectos</a>
-    <a href="#sobre-mi">Sobre mí</a>
-    <a href="#contacto" class="btn btn--primary btn--sm">Contacto</a>
+    <a href="#proyectos">{header.nav.projects}</a>
+    <a href="#sobre-mi">{header.nav.about}</a>
+    <a href="#contacto" class="btn btn--primary btn--sm">{header.nav.contact}</a>
   </nav>
 </header>

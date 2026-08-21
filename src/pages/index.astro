@@ -11,23 +11,22 @@ import Documentation from '../components/Documentation.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { cases } from '../data/cases';
+import content from '../data/content.json';
 
 const [lorenaZ, campoDeFlores] = cases;
+const { projects, site } = content;
 ---
-<Layout
-  title="María José Farah — Diseño Industrial"
-  description="Portfolio de María José Farah, diseñadora industrial en Córdoba, Argentina. Diseño y desarrollo de mobiliario y espacios."
->
+<Layout title={site.title} description={site.description}>
   <Header />
 
-  <main>
+  <main id="main">
     <Hero />
     <About />
 
-    <section id="proyectos" class="section container">
-      <p class="section__index">02 — Proyectos destacados</p>
-      <h2>Proyectos destacados</h2>
-      <p class="section__intro">Casos de asesoramiento en diseño de espacios y organización de eventos de marca.</p>
+    <section id="proyectos" class="section container" aria-labelledby="proyectos-heading">
+      <p class="section__index">{projects.sectionIndex}</p>
+      <h2 id="proyectos-heading">{projects.heading}</h2>
+      <p class="section__intro">{projects.intro}</p>
 
       <ProjectCase {...lorenaZ}>
         <Gallery slot="media" />
